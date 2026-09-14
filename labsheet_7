@@ -1,0 +1,212 @@
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// class MaxHeap {
+// public:
+//     vector<int> heap;
+
+//     void insert(int value) {
+//         heap.push_back(value);
+
+//         int i = heap.size() - 1;
+
+//         // Move upward
+//         while (i > 0) {
+//             int parent = (i - 1) / 2;
+
+//             if (heap[parent] >= heap[i])
+//                 break;
+
+//             swap(heap[parent], heap[i]);
+
+//             i = parent;
+//         }
+//     }
+
+//     int removeMax() {
+//         if (heap.empty())
+//             return -1;
+
+//         int maximum = heap[0];
+
+//         heap[0] = heap.back();
+//         heap.pop_back();
+
+//         int i = 0;
+
+//         // Move downward
+//         while (true) {
+//             int left = 2 * i + 1;
+//             int right = 2 * i + 2;
+//             int largest = i;
+
+//             if (left < heap.size() && heap[left] > heap[largest])
+//                 largest = left;
+
+//             if (right < heap.size() && heap[right] > heap[largest])
+//                 largest = right;
+
+//             if (largest == i)
+//                 break;
+
+//             swap(heap[i], heap[largest]);
+
+//             i = largest;
+//         }
+
+//         return maximum;
+//     }
+
+//     void display() {
+//         for (int x : heap)
+//             cout << x << " ";
+
+//         cout << endl;
+//     }
+// };
+
+// int main() {
+//     MaxHeap h;
+
+//     h.insert(40);
+//     h.insert(20);
+//     h.insert(50);
+//     h.insert(10);
+//     h.insert(30);
+
+//     cout << "Max Heap: ";
+//     h.display();
+
+//     cout << "Removed: " << h.removeMax() << endl;
+
+//     cout << "After deletion: ";
+//     h.display();
+
+//     return 0;
+// }
+
+
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+// #include <cstdlib>
+// using namespace std;
+
+// long long calculateSum(const vector<long long>& a) {
+//     long long sum = 0;
+
+//     for (int i = 1; i < a.size(); i++) {
+//         sum += abs(a[i] - a[i - 1]);
+//     }
+
+//     return sum;
+// }
+
+// int main() {
+
+//     int n;
+//     cin >> n;
+
+//     vector<long long> arr(n);
+
+//     for (int i = 0; i < n; i++)
+//         cin >> arr[i];
+
+//     sort(arr.begin(), arr.end());
+
+//     vector<long long> a, b;
+
+//     // Pattern 1
+//     int left = 0;
+//     int right = n - 1;
+
+//     while (left <= right) {
+//         if (left <= right)
+//             a.push_back(arr[left++]);
+
+//         if (left <= right)
+//             a.push_back(arr[right--]);
+//     }
+
+//     // Pattern 2
+//     left = 0;
+//     right = n - 1;
+
+//     while (left <= right) {
+//         if (left <= right)
+//             b.push_back(arr[right--]);
+
+//         if (left <= right)
+//             b.push_back(arr[left++]);
+//     }
+
+//     long long sumA = calculateSum(a);
+//     long long sumB = calculateSum(b);
+
+//     if (sumA >= sumB) {
+//         cout << "Arrangement: ";
+
+//         for (long long x : a)
+//             cout << x << " ";
+
+//         cout << "\nMaximum Sum = " << sumA;
+//     }
+//     else {
+//         cout << "Arrangement: ";
+
+//         for (long long x : b)
+//             cout << x << " ";
+
+//         cout << "\nMaximum Sum = " << sumB;
+//     }
+
+//     return 0;
+// }
+
+
+// #include <iostream>
+// #include <vector>
+// #include <climits>
+// using namespace std;
+
+// int smallestSubarray(vector<int>& arr, int target) {
+
+//     int n = arr.size();
+
+//     int left = 0;
+//     long long sum = 0;
+
+//     int answer = INT_MAX;
+
+//     for (int right = 0; right < n; right++) {
+
+//         sum += arr[right];
+
+//         while (sum > target) {
+
+//             answer = min(answer, right - left + 1);
+
+//             sum -= arr[left];
+
+//             left++;
+//         }
+//     }
+
+//     if (answer == INT_MAX)
+//         return -1;
+
+//     return answer;
+// }
+
+// int main() {
+
+//     vector<int> arr = {2, 1, 5, 2, 3, 2};
+
+//     int target = 7;
+
+//     cout << "Smallest length = "
+//          << smallestSubarray(arr, target);
+
+//     return 0;
+// }
